@@ -1,21 +1,27 @@
-const { MongoClient } = require('mongodb');
+import express from "express"
+const app=express()
+import cors from "cors"
+//user ki cookies ko access krpao or set kr pao or basically uski cookies pr main crud operation bhi perform kr paokyuki kuch tareeke hote jis se secur cookies browser pr rkh skte he server can read !!
+import cookieParser from "cookie-parser" 
 
-// YAHAN PASTE KARO connection string
-const uri = "mongodb+srv://Ronitkumar:Ronit123@1stcluster.9mczwfb.mongodb.net/?appName=1stcluster";
-// <password> ki jagah apna asli password dalna mat bhoolna!
+app.use(cors({
+    origin:process.env.CORS_ORIGIN,
+    credentials:true 
+})
+)
+//json ki format ma jo data aha uski maine limit rkh de he like 16kb!
+app.use(express.json({limit:"16kb"}))
 
-const client = new MongoClient(uri);
+//i search ronit kumar--->in url ronit%20 kumar (so yeh sabh bhi tu url ko btna pdta he! so i must have to config it through using the keyword that is (urlencoded)
+app.use(express.urlencoded({
+    //extended ka mtlab he k ap object ke andr bhi object de skte ho!
+    extended:true,limit:"16kb"
+}))
 
-async function run() {
-    try {
-        await client.connect();
-        console.log("MongoDB se connect ho gaya!");
-        
-        // Ab database operations kar sakte ho
-        
-    } finally {
-        await client.close();
-    }
-}
+//agr mojhe kisi image ya favicon hogya tu wo main kis folder ma rkho uske liye static word
+app.use(express.static("public"))
 
-run().catch(console.dir);
+app.use(cookieParser())
+
+
+export {app}

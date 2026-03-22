@@ -4,6 +4,24 @@ import dotenv from "dotenv"
 import connectdb from "./db/index.js";
 
 connectdb()
+.then(()=>{
+    //ab db successfully connect hogya he tu ap listen tu krna pdega n!(tabhi tu server start hoga)
+
+    app.on("error",(error)=>{
+        console.log("Err: ",error)
+        throw error
+    })
+
+    app.listen(process.env.PORT || 8000,()=>{
+        console.log(`Server is running on the port: ${process.env.PORT}`)
+    })
+})
+
+.catch((err)=>{
+    console.log("MONGODB CONNECTION FAILED!!! ",err)
+})
+
+
 //config is a method that takes object where we have to write the path
 dotenv.config({
     path:'/env'
