@@ -1,12 +1,15 @@
 //middlware 
 
+//overall this is the helper file k jahan pr agr koi msla aha tu humne uske liye file bnaye he thats called asynchandler.js
+
 //iske andr hum method bnaye ge or export krenge jahan pr need hogi!
 //two types of asynHandler that we can use-->1-trycatch   2-promises  
 
 
 //-----------2-promises  ------------
 const asynHandler=(requestHandler)=>{
-    (req,res,next)=>{
+    //return keyword-->(yahan bhi tu return krna hoga kyuki maine function liya he tu usko as a function he tu return kro n!!!!) 
+    return (req,res,next)=>{
         Promise.resolve(requestHandler(req,res,next))
         .catch((err)=>next(err))
     }

@@ -2,6 +2,13 @@
 //require('dotenv').config({path: './env'})
 import dotenv from "dotenv"
 import connectdb from "./db/index.js";
+import { app } from "./app.js";
+//config is a method that takes object where we have to write the path(so first step is config the env varaible)
+dotenv.config({
+    path:'/env'
+})
+
+
 
 connectdb()
 .then(()=>{
@@ -22,10 +29,7 @@ connectdb()
 })
 
 
-//config is a method that takes object where we have to write the path
-dotenv.config({
-    path:'/env'
-})
+
 
 
 

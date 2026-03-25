@@ -5,7 +5,7 @@ class ApiError extends Error{
         statusCode,
         message="Something went wrong",
         errors=[],
-        statck=""
+        stack=""
     ){
         //inside curly bracket means k ap override kr rhe ho constrcutor ko! 
         //like yahan pr message ko override krna he
@@ -21,7 +21,7 @@ class ApiError extends Error{
 
 
         if(stack){
-            this.stack=statck
+            this.stack=stack
         }
         else{
             Error.captureStackTrace(this,this.constructor)
